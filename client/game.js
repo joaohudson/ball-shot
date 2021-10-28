@@ -494,7 +494,7 @@ function startTimers(){
 		const max = canvas.width - PLAYER_SIZE;
 		const min = PLAYER_SIZE;
 		newWeapon(randomRange(min, max), -20, randomWeapon());
-	}, 10000);
+	}, 40000);
 	gameState.timers.push(timer);
 }
 
