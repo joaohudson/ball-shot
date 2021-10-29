@@ -448,7 +448,7 @@ function spawnerBall(){
 	}
 	else{
 		newBall(randomRange(min, max), -100, 0, 8);
-		newBall(randomRange(min, max) + 20, -100, 0, 8);
+		newBall(randomRange(min, max), -100, 0, 8);
 	}
 }
 
