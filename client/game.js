@@ -6,7 +6,7 @@ const gl = canvas.getContext('2d');
 const audios = {};
 const images = {};
 
-const GAME_DURATION = 200;
+const GAME_DURATION = 400;
 
 const WEAPON_SIZE = 32;
 const WEAPON_SPEED = .5;
@@ -55,7 +55,7 @@ const WEAPON_SHOTGUN = {
 
 const WEAPON_PICADASGALAXIAS = {
 	label: 'PICA DAS GALAXIAS',
-	ammo: 1000,
+	ammo: 200,
 	fireRate: 4,
 	piercing: true,
 	spread: 32
@@ -443,7 +443,13 @@ function spawnerBall(){
 	const max = canvas.width - PLAYER_SIZE;
 	const min = PLAYER_SIZE;
 	
-	newBall(randomRange(min, max), -100, 0, 8);
+	if(gameState.gameTime > GAME_DURATION * .5){
+		newBall(randomRange(min, max), -100, 0, 8);
+	}
+	else{
+		newBall(randomRange(min, max), -100, 0, 8);
+		newBall(randomRange(min, max) + 20, -100, 0, 8);
+	}
 }
 
 async function newImage(url){
@@ -487,7 +493,7 @@ function startTimers(){
 		
 	timer = setInterval(() => {
 		spawnerBall();
-	}, 100);
+	}, 350);
 	gameState.timers.push(timer);
 	
 	timer = setInterval(() => {
