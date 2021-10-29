@@ -135,6 +135,14 @@ function drawText(x, y, text, align, color){
 	gl.closePath();
 }
 
+function disorderedRemove(array, index){
+	const value = array[index];
+	const last = array.length - 1;
+	array[index] = array[last];
+	array[last] = value;
+	array.length--;
+}
+
 function randomInt(max){
 	return Math.floor(Math.random() * max);
 }
@@ -259,13 +267,13 @@ function updateBalls(){
 		ball.x += ball.dir.x;
 
 		if(ball.y > 600){
-			gameState.balls.splice(i, 1);
+			disorderedRemove(gameState.balls, i);
 			i--;
 			continue;
 		}
 		
 		if(!ball.alive){
-			gameState.balls.splice(i, 1);
+			disorderedRemove(gameState.balls, i);
 			i--;
 			newExplosion(ball.x, ball.y, ball.color);
 			if(audios.splash.currentTime > 0.05)
@@ -287,7 +295,7 @@ function updateParticles(){
 		particle.size -= 0.2;
 		
 		if(particle.size <= 0){
-			gameState.particles.splice(i, 1);
+			disorderedRemove(gameState.particles, i);
 			i--;
 			continue;
 		}
@@ -304,7 +312,7 @@ function updateBullets(){
 		bullet.lifeTime--;
 		
 		if(bullet.lifeTime <= 0){
-			gameState.bullets.splice(i, 1);
+			disorderedRemove(gameState.bullets, i);
 			i--;
 			continue;
 		}
@@ -341,7 +349,7 @@ function updateDroppedWeapons(){
 		drawImage(droppedWeapon.x, droppedWeapon.y, images.airammo);
 		
 		if(distance < WEAPON_SIZE * WEAPON_SIZE + PLAYER_SIZE * PLAYER_SIZE){
-			gameState.droppedWeapons.splice(i, 1);
+			disorderedRemove(gameState.droppedWeapons, i);
 			i--;
 				
 			changePlayerWeapon(droppedWeapon.info);
