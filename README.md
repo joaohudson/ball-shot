@@ -2,7 +2,7 @@
 
 Web game with pure javascript and back-end in Nodejs
 
-Uses mode:
+Modes of use:
 - Run it by opening the index.html file directly in the browser
 - Run server with command "node server.js"
 
