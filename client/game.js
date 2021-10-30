@@ -630,13 +630,14 @@
 	}
 	
 	async function main(){
-		await loadResources();
-
+		
 		//loading screen
 		drawText(canvas.width * .5, canvas.height * .5, 'LOADING...', 'center');
 
 		//evita mundaça súbita
 		await delay(1000);
+
+		await loadResources();
 		
 		setInterval(() => {
 			update();
