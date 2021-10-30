@@ -8,6 +8,8 @@ const images = {};
 
 const GAME_DURATION = 400;
 
+const BACKGROUND_SPEED = .3;
+
 const WEAPON_SIZE = 32;
 const WEAPON_SPEED = .5;
 
@@ -71,7 +73,8 @@ const gameState = {
 	gameTime: GAME_DURATION,
 	gameFinished: false,
 	gamePaused: true,
-	player: {x: 200, y: 460, points: 0, weapon: WEAPON_RIFLE, fireRate: 0, ammo: Infinity, smokeRate: 0}
+	player: {x: 200, y: 460, points: 0, weapon: WEAPON_RIFLE, fireRate: 0, ammo: Infinity, smokeRate: 0},
+	background: {offset: 0}
 };
 	
 function drawCircle(x, y, color, size){
@@ -260,6 +263,16 @@ function changePlayerWeapon(weapon){
 	gameState.player.ammo = weapon.ammo;
 }
 
+function updateCloud(){
+	const ch = images.cloud.height;
+
+	gameState.background.offset = (gameState.background.offset + BACKGROUND_SPEED) % ch;
+
+	const offset = gameState.background.offset;
+
+	gl.drawImage(images.cloud, 0, offset - ch);
+}
+
 function updateBalls(){
 	for(let i = 0; i < gameState.balls.length; i++){
 		let ball = gameState.balls[i];
@@ -360,8 +373,16 @@ function updateDroppedWeapons(){
 	
 function updatePlayer(){
 	const playerDir = inputs.right + inputs.left;
+	let sprite = images.spaceship;
 	
 	gameState.player.x += PLAYER_SPEED * playerDir;
+
+	if(playerDir > 0){
+		sprite = images.spaceshipRight;
+	}
+	else if(playerDir < 0){
+		sprite = images.spaceshipLeft;
+	}
 	
 	if(gameState.player.x < PLAYER_SIZE){
 		gameState.player.x = PLAYER_SIZE;
@@ -405,7 +426,7 @@ function updatePlayer(){
 		newSmoke(gameState.player.x, gameState.player.y + 20);
 	}
 	
-	drawImage(gameState.player.x, gameState.player.y, images.spaceship);
+	drawImage(gameState.player.x, gameState.player.y, sprite);
 	
 	drawText(10, 10, 'POINTS: ' + gameState.player.points);
 	
@@ -418,6 +439,7 @@ function updateGameTime(){
 
 function update(){
 	clearScreen();
+	updateCloud();
 	
 	if(gameState.gamePaused){
 		const xc = canvas.width * .5;
@@ -475,7 +497,10 @@ async function loadResources(){
 	images.ballGreen = await newImage('images/ball-green(32x32).png');
 	images.ballBlue = await newImage('images/ball-blue(32x32).png');
 	images.spaceship = await newImage('images/spaceship(64x64).png');
+	images.spaceshipLeft = await newImage('images/spaceship-left(64x64).png');
+	images.spaceshipRight = await newImage('images/spaceship-right(64x64).png');
 	images.airammo = await newImage('images/air-ammo(64x64).png');
+	images.cloud = await newImage('images/cloud.png');
 	
 	audios.splash = await new Audio('audios/splash.wav');
 	audios.collect = await new Audio('audios/collect.wav');
