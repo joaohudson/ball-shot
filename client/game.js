@@ -473,7 +473,7 @@
 		if(gameState.gameFinished){
 			const xc = canvas.width * .5;
 			const yc = canvas.height * .5;
-			drawText(xc, yc, 'TOTAL SCORES : ' + gameState.player.points, 'center');
+			drawText(xc, yc, 'TOTAL POINTS : ' + gameState.player.points, 'center');
 			drawText(xc, yc + 20, 'PRESS R TO RESTART', 'center');
 			return;
 		}
