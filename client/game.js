@@ -70,7 +70,7 @@
 	
 	const WEAPON_GRANADE_LAUNCHER = {
 		label: 'GRENADE LAUNCHER',
-		ammo: 20,
+		ammo: 40,
 		fireRate: 30,
 		piercing: false,
 		spread: 0,
