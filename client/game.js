@@ -366,7 +366,7 @@
 				}
 			}
 			
-			drawCircle(bullet.x, bullet.y, BULLET_COLOR, BULLET_SIZE);
+			drawImage(bullet.x, bullet.y, images.projectile);
 		}
 	}
 	
@@ -523,6 +523,7 @@
 		images.spaceshipRight = await newImage('images/spaceship-right(64x64).png');
 		images.airammo = await newImage('images/air-ammo(64x64).png');
 		images.cloud = await newImage('images/cloud.png');
+		images.projectile = await newImage('images/projectile(16x16).png');
 		
 		audios.splash = await new Audio('audios/splash.wav');
 		audios.collect = await new Audio('audios/collect.wav');
