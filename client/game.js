@@ -14,7 +14,6 @@
 	const WEAPON_SPEED = .5;
 	
 	const BULLET_LIFE_TIME = 500;
-	const BULLET_COLOR = 'yellow';
 	const BULLET_SIZE = 5;
 	const BULLET_SPEED = 20;
 	
@@ -112,14 +111,21 @@
 		gl.closePath();
 	}
 	
-	function drawImage(x, y, image){
+	function drawImage(x, y, image, blend){
 		const xo = x - image.width * .5;
 		const yo = y - image.height * .5;
-		
+		const defaultBlend = gl.globalCompositeOperation;
+	
+		if(blend){
+			gl.globalCompositeOperation = blend;
+		}
+
 		gl.beginPath();
 		gl.fillStyle = 'white';
 		gl.drawImage(image, xo, yo);
 		gl.closePath();
+
+		gl.globalCompositeOperation = defaultBlend;
 	}
 		
 	
@@ -366,7 +372,7 @@
 				}
 			}
 			
-			drawImage(bullet.x, bullet.y, images.projectile);
+			drawImage(bullet.x, bullet.y, images.projectile, 'lighter');
 		}
 	}
 	
