@@ -9,4 +9,4 @@ Modes of use:
 ### Important
 write in a .env file the PORT variable with the value of the desired port, if you are going to run the server
 
-Published at address: https://ball-shot.herokuapp.com/
+Published at address: https://mini-google-cs.herokuapp.com/sites/ball-shot/
