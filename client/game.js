@@ -18,6 +18,7 @@
 	const BULLET_SPEED = 20;
 	
 	const BALL_SIZE = 16;
+	const BALL_PENALTY = 1;
 	
 	const PLAYER_SPEED = 5;
 	const PLAYER_SIZE = 32;
@@ -94,7 +95,7 @@
 		gameTime: GAME_DURATION,
 		gameFinished: false,
 		gamePaused: true,
-		player: {x: 200, y: 460, points: 0, weapon: WEAPON_RIFLE, fireRate: 0, ammo: Infinity, smokeRate: 0},
+		player: {x: 200, y: 460, points: 100, weapon: WEAPON_RIFLE, fireRate: 0, ammo: Infinity, smokeRate: 0},
 		background: {offset: 0}
 	};
 		
@@ -280,6 +281,13 @@
 		gameState.player.weapon = weapon;
 		gameState.player.ammo = weapon.ammo;
 	}
+
+	function removePlayerPoints(points){
+		gameState.player.points -= points;
+		if(gameState.player.points <= 0){
+			gameState.gameFinished = true;
+		}
+	}
 	
 	function updateCloud(){
 		const ch = images.cloud.height;
@@ -299,6 +307,7 @@
 	
 			if(ball.y > 600){
 				disorderedRemove(gameState.balls, i);
+				removePlayerPoints(BALL_PENALTY);
 				i--;
 				continue;
 			}
@@ -479,7 +488,8 @@
 		if(gameState.gameFinished){
 			const xc = canvas.width * .5;
 			const yc = canvas.height * .5;
-			drawText(xc, yc, 'TOTAL POINTS : ' + gameState.player.points, 'center');
+			const finishedText = gameState.player.points <= 0 ? 'GAME OVER' : 'TOTAL POINTS : ' + gameState.player.points;
+			drawText(xc, yc, finishedText, 'center');
 			drawText(xc, yc + 20, 'PRESS R TO RESTART', 'center');
 			return;
 		}
