@@ -286,6 +286,7 @@
 		gameState.player.points -= points;
 		if(gameState.player.points <= 0){
 			gameState.gameFinished = true;
+			audios.gameOver.play();
 		}
 	}
 	
@@ -544,6 +545,7 @@
 		audios.splash = await new Audio('audios/splash.wav');
 		audios.collect = await new Audio('audios/collect.wav');
 		audios.end = await new Audio('audios/end.wav');
+		audios.gameOver = await new Audio('audios/game-over.wav');
 	}
 	
 	function startTimers(){
