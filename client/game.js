@@ -642,6 +642,41 @@
 		}
 	};
 
+	canvas.addEventListener('touchstart', (e) => {
+
+		if(gameState.gameFinished){
+			restartGame();
+		}
+
+		if(gameState.gamePaused){
+			gameState.gamePaused = false;
+			startTimers();
+		}
+
+		const bolding = canvas.getBoundingClientRect();
+		const x = e.changedTouches[0].pageX - bolding.left;
+
+		inputs.left = x < gameState.player.x ? -1 : 0;
+		inputs.right = x > gameState.player.x ? 1 : 0;
+		inputs.fire = true;
+	});
+
+	canvas.addEventListener('touchmove', (e) => {
+		const bolding = canvas.getBoundingClientRect();
+		const x = e.changedTouches[0].pageX - bolding.left;
+
+		inputs.left = x < gameState.player.x ? -1 : 0;
+		inputs.right = x > gameState.player.x ? 1 : 0;
+		inputs.fire = true;
+	});
+
+	canvas.addEventListener('touchend', (e) => {
+
+		inputs.left = 0;
+		inputs.right = 0;
+		inputs.fire = false;
+	});
+
 	function delay(time){
 		return new Promise((res, rej) => {
 			setTimeout(res, time);
@@ -665,5 +700,5 @@
 	
 	main();
 	
-	})();
+})();
 	
