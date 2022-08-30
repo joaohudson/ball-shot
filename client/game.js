@@ -643,6 +643,7 @@
 	};
 
 	canvas.addEventListener('touchstart', (e) => {
+		e.preventDefault();
 
 		if(gameState.gameFinished){
 			restartGame();
@@ -662,6 +663,7 @@
 	});
 
 	canvas.addEventListener('touchmove', (e) => {
+		e.preventDefault();
 		const bolding = canvas.getBoundingClientRect();
 		const x = e.changedTouches[0].pageX - bolding.left;
 
@@ -671,6 +673,7 @@
 	});
 
 	canvas.addEventListener('touchend', (e) => {
+		e.preventDefault();
 
 		inputs.left = 0;
 		inputs.right = 0;
