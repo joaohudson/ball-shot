@@ -1,9 +1,6 @@
 FROM node:18.13
 
 # Create app directory
-WORKDIR /client
-WORKDIR /client/audios
-WORKDIR /client/images
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
