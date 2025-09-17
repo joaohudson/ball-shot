@@ -1,3 +1,6 @@
+* {
+    user-select: none;
+}
 body {
     background-color: #222222;
     display: flex;
