@@ -1,27 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style>
-		body {
-			background-image: linear-gradient(to bottom, black , #1122AA);
-		}
-		body div{
-			text-align: center;
-		}
-		body div canvas{
-			background: black;
-			border: solid;
-		}
-		h1, h2, h3{
-			color: #22AA11;
-			text-align: center;
-		}
-		p{
-			text-align: center;
-			color: #228811;
-		}
-	</style>
+	<link rel="stylesheet" href="style.css" />
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Ball Shot</title>
 	<link href="images/night.png" rel="icon" />
 </head>
@@ -30,11 +12,20 @@
 	<div>
 		<canvas id="canvas" width="512" height="512"/>
 	</div>
+	<div id="mobile-controls" class="mobile-controls">
+		<button id="left-button">&lt;</button>
+		<button id="right-button">></button>
+		<button id="fire-button">Fire</button>
+	</div>
+	<div id="pc-instructions">
+		<h3>PC Controlls:</h3>
+		<p>Use arrow keys to move the air ship</p>
+		<p>Press spacebar to shoot</p>
+	</div>
+	<div>
+		<h2>Instructions:</h2>
+		<p>Destroy as many balls as you can in the shortest time possible</p>
+	</div>
 	<script src="game.js" type="text/javascript"></script>
-	<h2>Instructions:</h2>
-	<p>Destroy as many balls as you can in the shortest time possible</p>
-	<h3>Controlls:</h3>
-	<p>Use arrow keys to move the air ship</p>
-	<p>Press spacebar to shoot</p>
 </body>
 </html>

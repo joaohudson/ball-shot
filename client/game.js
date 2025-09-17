@@ -1,5 +1,11 @@
 (function(){
 
+	const mobileControls = {
+		rightButton: document.getElementById('right-button'),
+		leftButton: document.getElementById('left-button'),
+		fireButton: document.getElementById('fire-button')
+	};
+
 	const colors = ['red', 'green', 'blue'];
 	const canvas = document.getElementById('canvas');
 	const gl = canvas.getContext('2d');
@@ -41,8 +47,8 @@
 		fragmentCount: 0
 	}
 	
-	const WEAPON_SNIPER = {
-		label: 'SNIPER',
+	const WEAPON_SNIPER_RIFLE = {
+		label: 'SNIPER RIFLE',
 		ammo: 40,
 		fireRate: 25,
 		piercing: true,
@@ -78,7 +84,7 @@
 	}
 	
 	const WEAPONS_LIST = [
-		WEAPON_SNIPER,
+		WEAPON_SNIPER_RIFLE,
 		WEAPON_UZI,
 		WEAPON_SHOTGUN,
 		WEAPON_PICA_DAS_GALAXIAS,
@@ -653,30 +659,35 @@
 			gameState.gamePaused = false;
 			startTimers();
 		}
-
-		const bolding = canvas.getBoundingClientRect();
-		const x = e.changedTouches[0].pageX - bolding.left;
-
-		inputs.left = x < gameState.player.x ? -1 : 0;
-		inputs.right = x > gameState.player.x ? 1 : 0;
-		inputs.fire = true;
 	});
 
-	canvas.addEventListener('touchmove', (e) => {
+	mobileControls.rightButton.addEventListener('touchstart', (e) => {
 		e.preventDefault();
-		const bolding = canvas.getBoundingClientRect();
-		const x = e.changedTouches[0].pageX - bolding.left;
-
-		inputs.left = x < gameState.player.x ? -1 : 0;
-		inputs.right = x > gameState.player.x ? 1 : 0;
-		inputs.fire = true;
+		inputs.right = 1;
 	});
 
-	canvas.addEventListener('touchend', (e) => {
+	mobileControls.rightButton.addEventListener('touchend', (e) => {
 		e.preventDefault();
-
-		inputs.left = 0;
 		inputs.right = 0;
+	});
+
+	mobileControls.leftButton.addEventListener('touchstart', (e) => {
+		e.preventDefault();
+		inputs.left = -1;
+	});
+
+	mobileControls.leftButton.addEventListener('touchend', (e) => {
+		e.preventDefault();
+		inputs.left = 0;
+	});
+
+	mobileControls.fireButton.addEventListener('touchstart', (e) => {
+		e.preventDefault();
+		inputs.fire = true;
+	});
+
+	mobileControls.fireButton.addEventListener('touchend', (e) => {
+		e.preventDefault();
 		inputs.fire = false;
 	});
 

@@ -1,0 +1,62 @@
+body {
+    background-color: #222222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+}
+
+body div canvas {
+    background: black;
+    border: solid;
+}
+
+h1,
+h2,
+h3 {
+    color: #117faa;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    color: #118088;
+}
+
+.mobile-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1cm;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.mobile-controls button {
+    background-color: #117faa;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+ @media (max-width: 767px) {
+    #mobile-controls {
+        display: flex;
+    }
+    #pc-instructions {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    #mobile-controls {
+        display: none;
+    }
+    #pc-instructions {
+        display: block;
+    }
+}
